@@ -1,0 +1,19 @@
+{
+	"name": "@sie-js/siemens-fw-tool",
+	"version": "1.0.0",
+	"main": "src/index.js",
+	"type": "module",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"description": "Tools for Siemens firmware.",
+	"bin": {
+		"siemens-fw-tool": "./bin/siemens-fw-tool.js"
+	},
+	"repository": {
+		"url": "git+https://github.com/siemens-mobile-hacks/siemens-fw-tool.git"
+	},
+	"author": "kirill.zhumarin@gmail.com",
+	"license": "MIT",
+	"description": ""
+}
