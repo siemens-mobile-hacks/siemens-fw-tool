@@ -21,7 +21,7 @@ Works on all OS: Linux, OSX, Windows
     
     # Or use inside cloned repo
     git clone https://github.com/siemens-mobile-hacks/siemens-fw-tool && cd siemens-fw-tool && npm i
-    node bin/siemens-fw-tool.js FFSInit_C81_2_ua-retail_43_0390.exe
+    node bin/siemens-fw-tool.js unpack-exe FFSInit_C81_2_ua-retail_43_0390.exe
 	```
 
 **Windows**
