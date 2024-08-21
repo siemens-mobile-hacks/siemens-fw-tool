@@ -1,0 +1,8 @@
+{
+	"pkg": {
+		"targets": [
+			"latest-win-x64"
+		],
+		"assets": []
+	}
+}

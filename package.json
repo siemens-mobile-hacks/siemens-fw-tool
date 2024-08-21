@@ -6,7 +6,7 @@
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
-	"description": "Tools for Siemens firmware.",
+	"description": "",
 	"bin": {
 		"siemens-fw-tool": "./bin/siemens-fw-tool.js"
 	},
@@ -15,5 +15,10 @@
 	},
 	"author": "kirill.zhumarin@gmail.com",
 	"license": "MIT",
-	"description": ""
+	"dependencies": {
+		"@sie-js/fw": "^1.0.3",
+		"commander": "^12.1.0",
+		"jszip": "^3.10.1",
+		"sprintf-js": "^1.1.3"
+	}
 }
