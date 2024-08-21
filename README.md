@@ -4,6 +4,14 @@
 # SUMMARY
 Console utility for working with Siemens firmware files (.exe, .xbz. .xfs, .xbb).
 
+Supported .exe files:
+- SGOLD/EGOLD service/update .exe to .xbz
+- SGOLD/EGOLD FFSInit .exe to .zip
+- SCOUT to .map + .xbz + .xfs
+
+Supported firmware files:
+- .xbz/.xfs/.xbb to .bin fullflash
+
 Works on all OS: Linux, OSX, Windows
 
 # INSTALL
