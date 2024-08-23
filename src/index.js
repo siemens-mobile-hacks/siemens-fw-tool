@@ -1,13 +1,13 @@
 import path from 'node:path';
 import fs from 'node:fs';
-import { convertXbzToFlash, extractFromExe, isXbz, parseXbz } from "@sie-js/fw";
+import { convertXbiToFlash, extractFromExe, isXbi, parseXbi } from "@sie-js/fw";
 import { sprintf } from 'sprintf-js';
 import JSZip from 'jszip';
 
 export async function unpackExe(argv) {
 	let extractedFiles = extractFromExe(fs.readFileSync(argv.input));
 
-	let outDir = argv.outputDir ?? path.basename(argv.input);
+	let outDir = argv.outputDir ?? ".";
 	if (!fs.existsSync(outDir))
 		fs.mkdirSync(outDir, { recursive: true });
 
@@ -17,19 +17,23 @@ export async function unpackExe(argv) {
 		let contentType = detectContentType(extractedFile);
 
 		let fileName = `${path.basename(argv.input)}.${contentType}`;
-		if (contentType == 'map') {
-			fileName = extractedFile.toString().match(/<([^>]+)>\s*$/si)?.[1] || fileName;
-		} else if (contentType == 'xfs' || contentType == 'xbb' || contentType == 'xbz') {
-			let xbzInfo = parseXbz(extractedFile);
-			let lgpid = +xbzInfo.langpack.replace(/^lg/, '');
-			fileName = sprintf("%s_%02d%02d%02d.%s", xbzInfo.model, xbzInfo.svn, lgpid, xbzInfo.t9, contentType);
-		} else if (contentType == 'zip') {
-			let zip = await (new JSZip()).loadAsync(extractedFile);
-			let zipFile = zip.file("Config/ccq_vinfo.txt");
-			if (zipFile) {
-				let zipFileContent = await zipFile.async("string");
-				fileName = zipFileContent.split(/\r\n|\n/)[0] + ".zip";
+		try {
+			if (contentType == 'map') {
+				fileName = extractedFile.toString().match(/<([^>]+)>\s*$/si)?.[1] || fileName;
+			} else if (contentType == 'xfs' || contentType == 'xbb' || contentType == 'xbi') {
+				let xbiInfo = parseXbi(extractedFile);
+				let lgpid = +xbiInfo.langpack.replace(/^lg/, '');
+				fileName = sprintf("%s_%02d%02d%02d.%s", xbiInfo.model, xbiInfo.svn, lgpid, xbiInfo.t9, contentType);
+			} else if (contentType == 'zip') {
+				let zip = await (new JSZip()).loadAsync(extractedFile);
+				let zipFile = zip.file("Config/ccq_vinfo.txt");
+				if (zipFile) {
+					let zipFileContent = await zipFile.async("string");
+					fileName = zipFileContent.split(/\r\n|\n/)[0] + ".zip";
+				}
 			}
+		} catch (e) {
+			console.error(e);
 		}
 
 		fileName = fileName.replace(/\//g, '_');
@@ -49,23 +53,23 @@ export async function unpackExe(argv) {
 	}
 }
 
-export async function xbzToFlash(argv) {
-	let xbz = fs.readFileSync(argv.input);
-	let fullflash = convertXbzToFlash(xbz);
+export async function xbiToFlash(argv) {
+	let xbi = fs.readFileSync(argv.input);
+	let fullflash = convertXbiToFlash(xbi);
 	let outFile = argv.outputFile ?? (path.basename(argv.input) + ".bin");
 	console.log(outFile);
 	fs.writeFileSync(outFile, fullflash);
 }
 
 function detectContentType(buffer) {
-	if (isXbz(buffer)) {
-		let xbzInfo = parseXbz(buffer);
-		if (xbzInfo.updateType == 'ExtendedNewSplit') {
+	if (isXbi(buffer)) {
+		let xbiInfo = parseXbi(buffer);
+		if (xbiInfo.updateType == 'ExtendedNewSplit') {
 			return 'xfs';
-		} else if (xbzInfo.baseline1 == 'klf_bootcore') {
+		} else if (xbiInfo.baseline1 == 'klf_bootcore') {
 			return 'xbb';
 		}
-		return 'xbz';
+		return 'xbi';
 	} else if (buffer.subarray(0, 4).equals(Buffer.from("504B0304", "hex"))) {
 		return 'zip';
 	} else if (buffer.subarray(0, 13).equals(Buffer.from("[MapFileInfo]"))) {
