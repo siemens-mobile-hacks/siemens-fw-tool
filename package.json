@@ -1,6 +1,6 @@
 {
 	"name": "@sie-js/siemens-fw-tool",
-	"version": "1.0.5",
+	"version": "1.0.6",
 	"main": "src/index.js",
 	"type": "module",
 	"scripts": {
