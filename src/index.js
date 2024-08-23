@@ -7,7 +7,7 @@ import JSZip from 'jszip';
 export async function unpackExe(argv) {
 	let extractedFiles = extractFromExe(fs.readFileSync(argv.input));
 
-	let outDir = argv.output ?? path.basename(argv.input);
+	let outDir = argv.outputDir ?? path.basename(argv.input);
 	if (!fs.existsSync(outDir))
 		fs.mkdirSync(outDir, { recursive: true });
 
@@ -52,7 +52,7 @@ export async function unpackExe(argv) {
 export async function xbzToFlash(argv) {
 	let xbz = fs.readFileSync(argv.input);
 	let fullflash = convertXbzToFlash(xbz);
-	let outFile = argv.output ?? (path.basename(argv.input) + ".bin");
+	let outFile = argv.outputFile ?? (path.basename(argv.input) + ".bin");
 	console.log(outFile);
 	fs.writeFileSync(outFile, fullflash);
 }

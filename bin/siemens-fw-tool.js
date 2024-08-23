@@ -9,17 +9,17 @@ import { unpackExe, xbzToFlash } from "../src/index.js";
 	program.command('unpack-exe')
 		.description('Unpack FFSInit or service/update .exe')
 		.argument('<input>', 'path to .exe')
-		.argument('[output]', 'output dir')
-		.action(async function (input, output) {
-			await unpackExe({input, output, ...this.optsWithGlobals()});
+		.argument('[output-dir]', 'output dir')
+		.action(async function (input, outputFile) {
+			await unpackExe({input, outputFile, ...this.optsWithGlobals()});
 		});
 
 	program.command('xbz2bin')
-		.description('Convert .xbz/.xbi/.xbb files to fullflash.bin')
+		.description('Convert .xbz/.xbi/.xfs/.xbb/.exci/.exbi files to fullflash.bin')
 		.argument('<input>', 'path to .xbz')
-		.argument('[output]', 'output file')
-		.action(async function (input, output) {
-			await xbzToFlash({input, output, ...this.optsWithGlobals()});
+		.argument('[output-file]', 'output file')
+		.action(async function (input, outputDir) {
+			await xbzToFlash({input, outputDir, ...this.optsWithGlobals()});
 		});
 
 	program.showHelpAfterError();
