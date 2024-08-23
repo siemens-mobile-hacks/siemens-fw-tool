@@ -52,6 +52,6 @@ Options:
 
 Commands:
   unpack-exe <input> [output-dir]  Unpack FFSInit or service/update .exe
-  xbz2bin <input> [output-file]    Convert .xbz/.xbi/.xfs/.xbb/.exci/.exbi files to fullflash.bin
+  fw2bin <input> [output-file]     Convert .xbz/.xbi/.xfs/.xbb/.exci/.exbi files to fullflash.bin
   help [command]                   display help for command
 ```
