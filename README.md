@@ -48,10 +48,10 @@ Usage: siemens-fw-tool [options] [command]
 CLI tool for Siemens FW files.
 
 Options:
-  -h, --help                   display help for command
+  -h, --help                       display help for command
 
 Commands:
-  unpack-exe <input> [output]  Unpack FFSInit or service/update .exe
-  xbz2bin <input> [output]     Convert .xbz/.xbi/.xbb files to fullflash.bin
-  help [command]               display help for command
+  unpack-exe <input> [output-dir]  Unpack FFSInit or service/update .exe
+  xbz2bin <input> [output-file]    Convert .xbz/.xbi/.xfs/.xbb/.exci/.exbi files to fullflash.bin
+  help [command]                   display help for command
 ```
