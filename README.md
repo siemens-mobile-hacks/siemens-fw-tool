@@ -2,15 +2,18 @@
 [![NPM Version](https://img.shields.io/npm/v/%40sie-js%2Fsiemens-fw-tool)](https://www.npmjs.com/package/@sie-js/siemens-fw-tool)
 
 # SUMMARY
-Console utility for working with Siemens firmware files (.exe, .xbz. .xfs, .xbb).
+Console utility for working with Siemens EGOLD/SGOLD firmware files (.exe, .xbz, .xbi, .xfs, .xbb, .exci, .exbi).
 
 Supported .exe files:
-- SGOLD/EGOLD service/update .exe to .xbz
-- SGOLD/EGOLD FFSInit .exe to .zip
-- SCOUT to .map + .xbz + .xfs
+- Converting service/update **.exe** to **.xbz**
+- Converting FFSInit **.exe** to **.zip**
+- Converting SCOUT to **.map** + **.xbz** + **.xfs**
 
 Supported firmware files:
-- .xbz/.xfs/.xbb to .bin fullflash
+- Firmware: converting **.xbz** / **.xbi** to **.bin**
+- FFS: converting **.xfs** to **.bin**
+- BCORE: converting **.xbb** to **.bin**
+- FACTORY: converting **.exci** / **.exbi** to **.bin**
 
 Works on all OS: Linux, OSX, Windows
 
