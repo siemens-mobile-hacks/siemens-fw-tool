@@ -51,7 +51,8 @@ Options:
   -h, --help                       display help for command
 
 Commands:
+  info <input>                     Into about fw files.
   unpack-exe <input> [output-dir]  Unpack FFSInit or service/update .exe
-  fw2bin <input> [output-file]     Convert .xbz/.xbi/.xfs/.xbb/.exci/.exbi files to fullflash.bin
+  fw2bin <input> [output-file]     Convert WinSwup files to fullflash.bin
   help [command]                   display help for command
 ```
