@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { program } from "commander";
+import { program, Command } from "commander";
 import { unpackExe, xbiToFlash, info } from "../src/index.js";
 
 (async () => {
@@ -9,24 +9,24 @@ import { unpackExe, xbiToFlash, info } from "../src/index.js";
 	program.command('info')
 		.description('Into about fw files.')
 		.argument('<input>', 'path to WinSwup or .exe files')
-		.action(async function (input, outputDir) {
-			await info({input, ...this.optsWithGlobals()});
+		.action(async function(this: Command, input: string) {
+			await info({ input });
 		});
 
 	program.command('unpack-exe')
 		.description('Unpack FFSInit or service/update .exe')
 		.argument('<input>', 'path to .exe')
 		.argument('[output-dir]', 'output dir')
-		.action(async function (input, outputDir) {
-			await unpackExe({input, outputDir, ...this.optsWithGlobals()});
+		.action(async function(this: Command, input: string, outputDir?: string) {
+			await unpackExe({ input, outputDir });
 		});
 
 	program.command('fw2bin')
 		.description('Convert WinSwup files to fullflash.bin')
 		.argument('<input>', 'path to .xbi')
 		.argument('[output-file]', 'output file')
-		.action(async function (input, outputFile) {
-			await xbiToFlash({input, outputFile, ...this.optsWithGlobals()});
+		.action(async function(this: Command, input: string, outputFile?: string) {
+			await xbiToFlash({ input, outputFile });
 		});
 
 	program.showHelpAfterError();

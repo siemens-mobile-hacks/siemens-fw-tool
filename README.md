@@ -31,15 +31,13 @@ Works on all OS: Linux, OSX, Windows
     npx @sie-js/siemens-fw-tool unpack-exe FFSInit_C81_2_ua-retail_43_0390.exe
     
     # Or use inside cloned repo
-    git clone https://github.com/siemens-mobile-hacks/siemens-fw-tool && cd siemens-fw-tool && npm i
+    git clone https://github.com/siemens-mobile-hacks/siemens-fw-tool && cd siemens-fw-tool && pnpm i
     node bin/siemens-fw-tool.js unpack-exe FFSInit_C81_2_ua-retail_43_0390.exe
 	```
 
 **Windows**
 
-Download prebuilt `siemens-fw-tool.exe` from [releases](https://github.com/siemens-mobile-hacks/siemens-fw-tool/releases).
-
-Alternatively, you can [install nodejs on windows](https://nodejs.org/en/download/) and use instruction for OSX/Linux.
+You can [install nodejs on windows](https://nodejs.org/en/download/) and use instruction for OSX/Linux.
 
 # USAGE
 ```
