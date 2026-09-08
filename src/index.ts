@@ -89,8 +89,22 @@ async function infoXbi(argv: CmdInfoArgv, buffer: Buffer): Promise<void> {
 				}
 				break;
 
-			case "writes":
+			case "dataChunks":
+				if (Array.isArray(v)) {
+					addRow(k, v.length);
+				}
+				break;
+
+			case "hashArea":
 				// skip
+				break;
+
+			case "unknown":
+				if (typeof v === 'object' && v !== null) {
+					for (const [id, value] of Object.entries(v)) {
+						addRow(`${k}[${id}]`, Buffer.isBuffer(value) ? value.toString('hex') : JSON.stringify(value));
+					}
+				}
 				break;
 
 			case "mapInfo":
@@ -144,7 +158,13 @@ async function infoXbi(argv: CmdInfoArgv, buffer: Buffer): Promise<void> {
 				break;
 		}
 	}
-	console.log(asciiTable(infoTable, tableConfig).trim());
+
+	const output = asciiTable(infoTable, tableConfig)
+		.split('\n')
+		.map(line => line.trimEnd())
+		.join('\n')
+		.trim();
+	console.log(output);
 }
 
 async function unpackFilesFromExe(originalFileName: string, buffer: Buffer): Promise<ExtractedFile[]> {
